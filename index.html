@@ -1,0 +1,43 @@
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<canvas id="barChart" width="400" height="400"></canvas>
+<script>
+    // Data for the chart
+    const labels = [
+        'South Korea', 'Italy', 'Greece', 'Spain', 'Portugal', 'Ireland', 'Slovakia',
+        'Slovenia', 'Poland', 'Costa Rica', 'Turkey', 'Hungary', 'Luxembourg', 'Latvia',
+        'Belgium', 'Czechia', 'Chile', 'Lithuania', 'Switzerland', 'France', 'Mexico',
+        'United Kingdom', 'Austria', 'Australia', 'Canada', 'USA', 'Netherlands', 'Estonia',
+        'Colombia', 'Iceland', 'Germany', 'New Zealand', 'Norway', 'Finland', 'Sweden', 'Denmark'
+    ];
+    const data = {
+        labels: labels,
+        datasets: [{
+            label: 'Adults Living with Families (%)',
+            data: [81, 80, 78, 77, 76, 75, 75, 70, 66, 60, 56, 56, 56, 54, 51, 50, 50, 49, 49, 47, 46, 43, 42, 42, 39, 39, 37, 35, 35, 33, 33, 30, 19, 13, 12, 10],
+            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+        }]
+    };
+    
+    // Configuration for the chart
+    const config = {
+        type: 'bar',
+        data: data,
+        options: {
+            indexAxis: 'y', // This makes the chart horizontal, remove it for a vertical chart
+            scales: {
+                x: {
+                    beginAtZero: true
+                }
+            }
+        }
+    };
+    
+    // Render the chart
+    const myChart = new Chart(
+        document.getElementById('barChart'),
+        config
+    );
+    </script>
+    
