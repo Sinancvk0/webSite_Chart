@@ -66,6 +66,17 @@
                 <option value="all">Tüm Ülkeler</option>
                 <option value="world">Dünya</option>
                 <option value="turkey">Türkiye</option>
+                <option value="japan">Japonya</option>
+                <option value="usa">Amerika</option>
+                <option value="china">Çin</option>
+                <option value="southKorea">Güney Kore</option>
+                <option value="germany">Almanya</option>
+                <option value="france">Fransa</option>
+                <option value="africa">Sahra Altı Afrika</option>
+                <option value="india">Hindistan</option>
+                <option value="england">Birleşik Krallık</option>
+                <option value="spain">İspanya</option>
+                <option value="brazil">Brezilya</option>
             </select>
         </div>
         
@@ -75,13 +86,60 @@
     <script>
         const ctx = document.getElementById('myChart').getContext('2d');
 
-        const gradientWorld = ctx.createLinearGradient(0, 0, 0, 400);
-        gradientWorld.addColorStop(0, 'rgba(41, 128, 185, 0.6)');
-        gradientWorld.addColorStop(1, 'rgba(41, 128, 185, 0)');
+        const gradients = {
+            world: ctx.createLinearGradient(0, 0, 0, 400),
+            turkey: ctx.createLinearGradient(0, 0, 0, 400),
+            japan: ctx.createLinearGradient(0, 0, 0, 400),
+            usa: ctx.createLinearGradient(0, 0, 0, 400),
+            china: ctx.createLinearGradient(0, 0, 0, 400),
+            southKorea: ctx.createLinearGradient(0, 0, 0, 400),
+            germany: ctx.createLinearGradient(0, 0, 0, 400),
+            france: ctx.createLinearGradient(0, 0, 0, 400),
+            africa: ctx.createLinearGradient(0, 0, 0, 400),
+            india: ctx.createLinearGradient(0, 0, 0, 400),
+            england: ctx.createLinearGradient(0, 0, 0, 400),
+            spain: ctx.createLinearGradient(0, 0, 0, 400),
+            brazil: ctx.createLinearGradient(0, 0, 0, 400)
+        };
 
-        const gradientTurkey = ctx.createLinearGradient(0, 0, 0, 400);
-        gradientTurkey.addColorStop(0, 'rgba(231, 76, 60, 0.6)');
-        gradientTurkey.addColorStop(1, 'rgba(231, 76, 60, 0)');
+        gradients.world.addColorStop(0, 'rgba(41, 128, 185, 0.6)');
+        gradients.world.addColorStop(1, 'rgba(41, 128, 185, 0)');
+        
+        gradients.turkey.addColorStop(0, 'rgba(231, 76, 60, 0.6)');
+        gradients.turkey.addColorStop(1, 'rgba(231, 76, 60, 0)');
+
+        gradients.japan.addColorStop(0, 'rgba(155, 89, 182, 0.6)');
+        gradients.japan.addColorStop(1, 'rgba(155, 89, 182, 0)');
+
+        gradients.usa.addColorStop(0, 'rgba(52, 152, 219, 0.6)');
+        gradients.usa.addColorStop(1, 'rgba(52, 152, 219, 0)');
+
+        gradients.china.addColorStop(0, 'rgba(255, 193, 7, 0.6)');
+        gradients.china.addColorStop(1, 'rgba(255, 193, 7, 0)');
+
+        gradients.southKorea.addColorStop(0, 'rgba(46, 204, 113, 0.6)');
+        gradients.southKorea.addColorStop(1, 'rgba(46, 204, 113, 0)');
+
+        gradients.germany.addColorStop(0, 'rgba(41, 128, 185, 0.6)');
+        gradients.germany.addColorStop(1, 'rgba(41, 128, 185, 0)');
+
+        gradients.france.addColorStop(0, 'rgba(241, 196, 15, 0.6)');
+        gradients.france.addColorStop(1, 'rgba(241, 196, 15, 0)');
+
+        gradients.africa.addColorStop(0, 'rgba(26, 188, 156, 0.6)');
+        gradients.africa.addColorStop(1, 'rgba(26, 188, 156, 0)');
+
+        gradients.india.addColorStop(0, 'rgba(230, 126, 34, 0.6)');
+        gradients.india.addColorStop(1, 'rgba(230, 126, 34, 0)');
+
+        gradients.england.addColorStop(0, 'rgba(44, 62, 80, 0.6)');
+        gradients.england.addColorStop(1, 'rgba(44, 62, 80, 0)');
+
+        gradients.spain.addColorStop(0, 'rgba(231, 76, 60, 0.6)');
+        gradients.spain.addColorStop(1, 'rgba(231, 76, 60, 0)');
+
+        gradients.brazil.addColorStop(0, 'rgba(39, 174, 96, 0.6)');
+        gradients.brazil.addColorStop(1, 'rgba(39, 174, 96, 0)');
 
         const data = {
             labels: [
@@ -98,7 +156,7 @@
                 world: {
                     label: 'Dünya',
                     data: [
-                        4.85, 4.82, 5.00, 4.92, 5.00, 5.00, 4.93, 5.07, 4.93, 4.74,
+                    4.85, 4.82, 5.00, 4.92, 5.00, 5.00, 4.93, 5.07, 4.93, 4.74,
                         4.70, 4.57, 5.02, 5.31, 5.12, 5.07, 4.96, 4.85, 4.96, 4.87,
                         4.83, 4.68, 4.55, 4.42, 4.26, 4.08, 3.97, 3.85, 3.79, 3.77,
                         3.74, 3.71, 3.71, 3.58, 3.55, 3.52, 3.50, 3.48, 3.39, 3.35,
@@ -107,7 +165,7 @@
                         2.60, 2.59, 2.61, 2.57, 2.56, 2.54, 2.54, 2.50, 2.44, 2.40,
                         2.32, 2.29, 2.27, 2.25
                     ],
-                    backgroundColor: gradientWorld,
+                    backgroundColor: gradients.world,
                     borderColor: 'rgba(41, 128, 185, 1)',
                     borderWidth: 3,
                     fill: true,
@@ -118,16 +176,16 @@
                 turkey: {
                     label: 'Türkiye',
                     data: [
-                        6.468, 6.468, 6.47, 6.477, 6.468, 6.463, 6.463, 6.454, 6.434, 6.416,
+                    6.468, 6.468, 6.47, 6.477, 6.468, 6.463, 6.463, 6.454, 6.434, 6.416,
                         6.383, 6.419, 6.382, 6.339, 6.291, 6.22, 6.152, 6.057, 5.962, 5.872,
                         5.775, 5.671, 5.548, 5.41, 5.243, 5.087, 4.931, 4.784, 4.691, 4.579,
                         4.453, 4.351, 4.205, 4.056, 3.911, 3.779, 3.658, 3.542, 3.445, 3.336,
                         3.107, 3.003, 2.939, 2.916, 2.874, 2.835, 2.779, 2.744, 2.707, 2.63,
                         2.487, 2.392, 2.268, 2.202, 2.197, 2.197, 2.193, 2.183, 2.167, 2.145,
                         2.08, 2.047, 2.109, 2.107, 2.186, 2.157, 2.115, 2.082, 2.004, 1.886,
-                        1.786, 1.744, 1.693, 1.628
+                        1.768, 1.708, 1.625, 1.625
                     ],
-                    backgroundColor: gradientTurkey,
+                    backgroundColor: gradients.turkey,
                     borderColor: 'rgba(231, 76, 60, 1)',
                     borderWidth: 3,
                     fill: true,
@@ -135,6 +193,163 @@
                     pointBackgroundColor: 'rgba(231, 76, 60, 1)',
                     pointRadius: 4
                 },
+                japan: {
+                    label: 'Japonya',
+                    data: [
+                    3.615, 3.225, 2.947, 2.673, 2.468, 2.349, 2.206, 2.036, 2.097, 2.035, 
+                        1.981, 1.928, 1.928, 1.951, 1.939, 1.925, 1.925, 1.915, 1.922, 1.935, 
+                        1.951, 1.935, 1.94, 1.935, 1.95, 1.945, 1.93, 1.94, 1.945, 1.95, 
+                        1.925, 1.94, 1.945, 1.945, 1.955, 1.96, 1.95, 1.955, 1.945, 1.935, 
+                        1.94, 1.94, 1.935, 1.935, 1.94, 1.945, 1.935, 1.94, 1.94, 1.94, 
+                        1.94, 1.935, 1.94, 1.945, 1.945, 1.945, 1.935, 1.935, 1.94, 1.945, 
+                        1.94, 1.94, 1.935, 1.935, 1.94, 1.94, 1.94, 1.94, 1.935, 1.94, 
+                        1.94, 1.935, 1.94, 1.945, 1.94
+                    ],
+                    backgroundColor: gradients.japan,
+                    borderColor: 'rgba(155, 89, 182, 1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: 'rgba(155, 89, 182, 1)',
+                    pointRadius: 4
+                },
+                usa: {
+                    label: 'Amerika',
+                    data: [
+                    3.09, 3.20, 3.29, 3.36, 3.48, 3.52, 3.62, 3.70, 3.75, 3.75,
+                        3.73, 3.69, 3.53, 3.39, 3.26, 2.98, 2.77, 2.61, 2.51, 2.50,
+                        2.52, 2.32, 2.06, 1.92, 1.87, 1.82, 1.79, 1.83, 1.80, 1.84,
+                        1.86, 1.85, 1.86, 1.83, 1.83, 1.85, 1.85, 1.89, 1.94, 2.01,
+                        2.07, 2.06, 2.04, 2.01, 1.99, 1.97, 1.96, 1.96, 1.98, 1.99,
+                        2.03, 2.01, 2.00, 2.03, 2.03, 2.04, 2.09, 2.10, 2.05, 1.99,
+                        1.92, 1.88, 1.86, 1.84, 1.85, 1.83, 1.80, 1.75, 1.72, 1.68,
+                        1.62, 1.63, 1.67, 1.62
+                    ],
+                    backgroundColor: gradients.usa,
+                    borderColor: 'rgba(52, 152, 219, 1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: 'rgba(52, 152, 219, 1)',
+                    pointRadius: 4
+                },
+                china: {
+                    label: 'Çin',
+                    data: [
+                        // Add data for 'china' here
+                    ],
+                    backgroundColor: gradients.china,
+                    borderColor: 'rgba(255, 193, 7, 1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: 'rgba(255, 193, 7, 1)',
+                    pointRadius: 4
+                },
+                southKorea: {
+                    label: 'Güney Kore',
+                    data: [
+                        // Add data for 'southKorea' here
+                    ],
+                    backgroundColor: gradients.southKorea,
+                    borderColor: 'rgba(46, 204, 113, 1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: 'rgba(46, 204, 113, 1)',
+                    pointRadius: 4
+                },
+                germany: {
+                    label: 'Almanya',
+                    data: [
+                        // Add data for 'germany' here
+                    ],
+                    backgroundColor: gradients.germany,
+                    borderColor: 'rgba(41, 128, 185, 1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: 'rgba(41, 128, 185, 1)',
+                    pointRadius: 4
+                },
+                france: {
+                    label: 'Fransa',
+                    data: [
+                        // Add data for 'france' here
+                    ],
+                    backgroundColor: gradients.france,
+                    borderColor: 'rgba(241, 196, 15, 1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: 'rgba(241, 196, 15, 1)',
+                    pointRadius: 4
+                },
+                africa: {
+                    label: 'Sahra Altı Afrika',
+                    data: [
+                        // Add data for 'africa' here
+                    ],
+                    backgroundColor: gradients.africa,
+                    borderColor: 'rgba(26, 188, 156, 1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: 'rgba(26, 188, 156, 1)',
+                    pointRadius: 4
+                },
+                india: {
+                    label: 'Hindistan',
+                    data: [
+                        // Add data for 'india' here
+                    ],
+                    backgroundColor: gradients.india,
+                    borderColor: 'rgba(230, 126, 34, 1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: 'rgba(230, 126, 34, 1)',
+                    pointRadius: 4
+                },
+                england: {
+                    label: 'Birleşik Krallık',
+                    data: [
+                        // Add data for 'england' here
+                    ],
+                    backgroundColor: gradients.england,
+                    borderColor: 'rgba(44, 62, 80, 1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: 'rgba(44, 62, 80, 1)',
+                    pointRadius: 4
+                },
+                spain: {
+                    label: 'İspanya',
+                    data: [
+                        // Add data for 'spain' here
+                    ],
+                    backgroundColor: gradients.spain,
+                    borderColor: 'rgba(231, 76, 60, 1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: 'rgba(231, 76, 60, 1)',
+                    pointRadius: 4
+                },
+                brazil: {
+                    label: 'Brezilya',
+                    data: [
+                        // Add data for 'brazil' here
+                    ],
+                    backgroundColor: gradients.brazil,
+                    borderColor: 'rgba(39, 174, 96, 1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: 'rgba(39, 174, 96, 1)',
+                    pointRadius: 4
+                }
             }
         };
 
@@ -212,3 +427,4 @@
 </body>
 
 </html>
+
