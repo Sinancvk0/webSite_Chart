@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zaman Serisi Alan Grafiği</title>
+    <title>İTOSAM</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -22,7 +22,7 @@
 
         .chart-container {
             position: relative;
-            width: 85%;
+            width: 100%;
             max-width: 1000px;
             background: #ffff;
             padding: 30px;
@@ -35,7 +35,7 @@
             font-size: 18px;
             margin-bottom: 25px;
             color: #000000;
-        
+
             /* font-weight: bold; */
         }
 
@@ -51,10 +51,20 @@
 
         select {
             font-size: 16px;
-            padding: 2px;
+            padding: 10px 15px;
             border-radius: 5px;
-            border: none;
+            border: 1px solid #ddd;
+            background-color: #f8f9fa;
             outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+
+        select:focus {
+            border-color: #007bff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: #fff;
         }
 
         /* Mobile Styles */
@@ -71,6 +81,11 @@
                 width: 95%;
                 padding: 20px;
             }
+
+            select {
+                font-size: 14px;
+                padding: 8px 12px;
+            }
         }
     </style>
 </head>
@@ -80,11 +95,12 @@
         <div class="chart-title">Şekil 1 Seçili Ülkeler Toplam Doğrukanlık Hızı (Kadın Başına)</div>
         <div class="dropdown">
             <select id="countrySelect">
+                <option value="" disabled selected>Ülke Seçiniz</option>
                 <option value="all">Tüm Ülkeler</option>
                 <option value="world">Dünya</option>
                 <option value="turkey">Türkiye</option>
                 <option value="japan">Japonya</option>
-                <option value="usa">Amerika</option>
+                <option value="usa">ABD</option>
                 <option value="china">Çin</option>
                 <option value="southKorea">Güney Kore</option>
                 <option value="germany">Almanya</option>
@@ -95,15 +111,21 @@
                 <option value="spain">İspanya</option>
                 <option value="brazil">Brezilya</option>
             </select>
+
+       
         </div>
         <canvas id="myChart"></canvas>
-     
-            <div style="color:#000000 ;" class="source">Kaynak: OECD</div>
-       
+        <br>
+
+        <div style="color:#252222 ;" class="source">Kaynak:OECD &nbsp; Görsel Tasarım:İTOSAM </div>
+
     </div>
-    
+
 
     <script>
+
+    
+
         const ctx = document.getElementById('myChart').getContext('2d');
 
         const gradients = {
@@ -122,13 +144,13 @@
             brazil: ctx.createLinearGradient(0, 0, 0, 400)
         };
 
-        gradients.world.addColorStop(0, 'rgba(41, 128, 185, 0.6)');
+        gradients.world.addColorStop(0, 'rgba(39, 55, 245, 0.8)');
         gradients.world.addColorStop(1, 'rgba(41, 128, 185, 0)');
 
-        gradients.turkey.addColorStop(0, 'rgba(231, 76, 60, 0.6)');
+        gradients.turkey.addColorStop(0, 'rgba(255, 41, 43, 1)');
         gradients.turkey.addColorStop(1, 'rgba(231, 76, 60, 0)');
 
-        gradients.japan.addColorStop(0, 'rgba(155, 89, 182, 0.6)');
+        gradients.japan.addColorStop(0, 'rgba(73, 203, 190, 0.39)');
         gradients.japan.addColorStop(1, 'rgba(155, 89, 182, 0)');
 
         gradients.usa.addColorStop(0, 'rgba(52, 152, 219, 0.6)');
@@ -143,7 +165,7 @@
         gradients.germany.addColorStop(0, 'rgba(41, 128, 185, 0.6)');
         gradients.germany.addColorStop(1, 'rgba(41, 128, 185, 0)');
 
-        gradients.france.addColorStop(0, 'rgba(241, 196, 15, 0.6)');
+        gradients.france.addColorStop(0, 'rgba(153, 79, 185, 1)');
         gradients.france.addColorStop(1, 'rgba(241, 196, 15, 0)');
 
         gradients.africa.addColorStop(0, 'rgba(26, 188, 156, 0.6)');
@@ -158,7 +180,7 @@
         gradients.spain.addColorStop(0, 'rgba(231, 76, 60, 0.6)');
         gradients.spain.addColorStop(1, 'rgba(231, 76, 60, 0)');
 
-        gradients.brazil.addColorStop(0, 'rgba(39, 174, 96, 0.6)');
+        gradients.brazil.addColorStop(0, 'rgba(150, 73, 203, 0.39)');
         gradients.brazil.addColorStop(1, 'rgba(39, 174, 96, 0)');
 
         const data = {
@@ -186,12 +208,12 @@
                         2.32, 2.29, 2.27, 2.25
                     ],
                     backgroundColor: gradients.world,
-                    borderColor: 'rgba(41, 128, 185, 0.8)',
+                    borderColor: 'rgba(39, 55, 245, 0.8)',
                     borderWidth: 3,
-                    tension:0,
-                    pointRadius:1
-                 
-                    //fill: true
+                    tension: 0,
+                    pointRadius: 1,
+                    fill: false,
+                    //hidden:false
                 },
                 turkey: {
                     label: 'Türkiye',
@@ -206,10 +228,11 @@
                         1.768, 1.708, 1.625, 1.625
                     ],
                     backgroundColor: gradients.turkey,
-                    borderColor: 'rgba(231, 76, 60, 0.8)',
+                    borderColor: 'rgba(255, 41, 43, 1)',
                     borderWidth: 3,
-                    pointRadius:1
-                    //fill: true
+                    pointRadius: 1
+                    , fill: false,
+                    //hidden:false
                 },
                 japan: {
                     label: 'Japonya',
@@ -224,13 +247,14 @@
                         1.94, 1.935, 1.94, 1.945, 1.94
                     ],
                     backgroundColor: gradients.japan,
-                    borderColor: 'rgba(155, 89, 182, 0.8)',
+                    borderColor: 'rgba(73, 203, 190, 0.39)',
                     borderWidth: 3,
-                    pointRadius:1
-                    //fill: true
+                    pointRadius: 1
+                    , fill: false,
+                    //hidden:false
                 },
                 usa: {
-                    label: 'Amerika',
+                    label: 'ABD',
                     data: [
                         3.09, 3.20, 3.29, 3.36, 3.48, 3.52, 3.62, 3.70, 3.75, 3.75,
                         3.73, 3.69, 3.53, 3.39, 3.26, 2.98, 2.77, 2.61, 2.51, 2.50,
@@ -244,8 +268,9 @@
                     backgroundColor: gradients.usa,
                     borderColor: 'rgba(52, 152, 219, 0.8)',
                     borderWidth: 3,
-                    pointRadius:1
-                    //fill: true
+                    pointRadius: 1
+                    , fill: false,
+                    //hidden:false
                 },
                 china: {
                     label: 'Çin',
@@ -255,8 +280,9 @@
                     backgroundColor: gradients.china,
                     borderColor: 'rgba(255, 193, 7, 0.8)',
                     borderWidth: 3,
-                    pointRadius:1
-                    //fill: true
+                    pointRadius: 1,
+                    fill: false,
+                    //hidden:false
                 },
                 southKorea: {
                     label: 'Güney Kore',
@@ -264,10 +290,11 @@
                         6.063, 6.089, 6.122, 6.171, 6.174, 6.169, 6.175, 6.178, 6.152, 6.096, 5.994, 5.803, 5.562, 5.334, 5.068, 4.887, 4.782, 4.615, 4.51, 4.447, 4.459, 4.259, 4.02, 3.803, 3.555, 3.313, 3.119, 2.954, 2.699, 2.748, 2.734, 2.669, 2.431, 2.102, 1.832, 1.705, 1.623, 1.571, 1.558, 1.564, 1.603, 1.702, 1.738, 1.683, 1.67, 1.646, 1.599, 1.555, 1.497, 1.469, 1.467, 1.342, 1.227, 1.199, 1.164, 1.115, 1.145, 1.215, 1.19, 1.178, 1.226, 1.258, 1.274, 1.206, 1.197, 1.202, 1.14, 1.035, 0.951, 0.881, 0.812, 0.783, 0.78, 0.72
                     ],
                     backgroundColor: gradients.southKorea,
-                    borderColor: 'rgba(46, 204, 113, 0.8)',
+                    borderColor: 'rgba(73, 203, 93, 0.89)',
                     borderWidth: 3,
-                    pointRadius:1
-                    //fill: true
+                    pointRadius: 1
+                    , fill: false,
+                    //hidden:false
                 },
                 germany: {
                     label: 'Almanya',
@@ -277,8 +304,9 @@
                     backgroundColor: gradients.germany,
                     borderColor: 'rgba(41, 128, 185, 0.8)',
                     borderWidth: 3,
-                    pointRadius:1
-                    //fill: true
+                    pointRadius: 1
+                    , fill: false,
+                    //hidden:false
                 },
                 france: {
                     label: 'Fransa',
@@ -286,10 +314,11 @@
                         2.97, 2.82, 2.78, 2.70, 2.71, 2.70, 2.69, 2.71, 2.69, 2.75, 2.74, 2.83, 2.79, 2.87, 2.88, 2.83, 2.78, 2.65, 2.57, 2.53, 2.48, 2.50, 2.43, 2.32, 2.13, 1.94, 1.83, 1.87, 1.83, 1.86, 1.95, 1.95, 1.92, 1.79, 1.81, 1.82, 1.83, 1.80, 1.81, 1.79, 1.78, 1.77, 1.74, 1.66, 1.67, 1.72, 1.74, 1.73, 1.76, 1.79, 1.88, 1.88, 1.87, 1.87, 1.90, 1.92, 1.97, 1.95, 1.99, 1.99, 2.02, 2.00, 1.99, 1.97, 1.97, 1.93, 1.89, 1.86, 1.84, 1.83, 1.79, 1.80, 1.76, 1.64
                     ],
                     backgroundColor: gradients.france,
-                    borderColor: 'rgba(241, 196, 15, 0.8)',
+                    borderColor: 'rgba(153, 79, 185, 1)',
                     borderWidth: 3,
-                    pointRadius:1
-                    //fill: true
+                    pointRadius: 1
+                    , fill: false
+                    ,  //hidden:false
                 },
                 africa: {
                     label: 'Sahra Altı Afrika',
@@ -299,8 +328,9 @@
                     backgroundColor: gradients.africa,
                     borderColor: 'rgba(26, 188, 156, 0.8)',
                     borderWidth: 3,
-                    pointRadius:1
-                    //fill: true
+                    pointRadius: 1
+                    , fill: false,
+                    //hidden:false
                 },
                 india: {
                     label: 'Hindistan',
@@ -310,8 +340,9 @@
                     backgroundColor: gradients.india,
                     borderColor: 'rgba(230, 126, 34, 0.8)',
                     borderWidth: 3,
-                    pointRadius:1
-                    //fill: true
+                    pointRadius: 1
+                    , fill: false,
+                    //hidden:false
                 },
                 england: {
                     label: 'Birleşik Krallık',
@@ -321,8 +352,9 @@
                     backgroundColor: gradients.england,
                     borderColor: 'rgba(44, 62, 80, 0.8)',
                     borderWidth: 3,
-                    pointRadius:1
-                    //fill: true
+                    pointRadius: 1
+                    , fill: false,
+                    //hidden:false
                 },
                 spain: {
                     label: 'İspanya',
@@ -332,8 +364,9 @@
                     backgroundColor: gradients.spain,
                     borderColor: 'rgba(231, 76, 60, 0.8)',
                     borderWidth: 3,
-                    pointRadius:1
-                    //fill: true
+                    pointRadius: 1
+                    , fill: false,
+                    //hidden:false
                 },
                 brazil: {
                     label: 'Brezilya',
@@ -341,10 +374,11 @@
                         6.12, 6.12, 6.10, 6.09, 6.09, 6.08, 6.08, 6.08, 6.08, 6.08, 6.05, 6.02, 5.98, 5.93, 5.82, 5.68, 5.52, 5.34, 5.17, 5.04, 4.93, 4.84, 4.74, 4.64, 4.50, 4.42, 4.34, 4.27, 4.20, 4.12, 4.04, 3.94, 3.84, 3.72, 3.60, 3.48, 3.36, 3.23, 3.11, 3.01, 2.90, 2.81, 2.71, 2.66, 2.60, 2.57, 2.51, 2.47, 2.42, 2.34, 2.25, 2.16, 2.08, 2.01, 1.97, 1.94, 1.90, 1.85, 1.82, 1.80, 1.79, 1.78, 1.77, 1.76, 1.78, 1.78, 1.73, 1.74, 1.74, 1.71, 1.65, 1.64, 1.63, 1.62
                     ],
                     backgroundColor: gradients.brazil,
-                    borderColor: 'rgba(39, 174, 96, 0.8)',
+                    borderColor: 'rgba(150, 73, 203, 0.39)',
                     borderWidth: 3,
-                    //fill: true
-                    pointRadius:1
+                    fill: false,
+                    pointRadius: 1,
+                    //hidden:false
                 }
             }
         };
@@ -353,7 +387,8 @@
             type: 'line',
             data: {
                 labels: data.labels,
-                datasets: Object.values(data.datasets)
+                // datasets: Object.values(data.datasets)
+                datasets: []
             },
             options: {
                 responsive: true,
@@ -364,31 +399,51 @@
                     },
                     tooltip: {
                         callbacks: {
-                            label: function (tooltipItem) {
-                                return tooltipItem.dataset.label + ': ' + tooltipItem.raw;
+                            label: function (context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += context.parsed.y.toFixed(2);
+                                }
+                                return label;
                             }
                         }
                     }
                 },
                 scales: {
                     x: {
+
+
                         grid: {
                             display: false,
-                            
+
                         },
-                        stacked: false,
                         ticks: {
-                            callback: function(value, index, values) {
-                                
-                                return (index % 5 === 0) ? this.getLabelForValue(value) : '';
-                            }
-                }
+                            autoSkip: false,
+                            callback: function (val, index) {
+
+                                const year = this.getLabelForValue(val);
+
+
+                                if (year === '2023' || index % 5 === 0) {
+                                    return year;
+                                }
+                                return '';
+                            },
+                        },
+
+                        stacked: false,
+
+
                     },
                     y: {
                         grid: {
                             display: true,
-                           
+
                         },
+
                         stacked: false
                     }
                 }
@@ -397,11 +452,23 @@
 
         const chart = new Chart(ctx, config);
 
+
+        function loadInitialCountries() {
+            const datasets = ['world', 'turkey', 'usa', 'china', 'france'].map(country => ({
+                ...data.datasets[country],
+                fill: false
+            }));
+
+            chart.data.datasets = datasets;
+            chart.update();
+        }
+
+
         function updateLegendVisibility() {
             const screenWidth = window.innerWidth;
             const isMobile = screenWidth <= 768;
 
-            chart.options.plugins.legend.display = !isMobile; 
+            chart.options.plugins.legend.display = !isMobile;
             chart.update();
         }
 
@@ -412,21 +479,32 @@
         document.getElementById('countrySelect').addEventListener('change', function (event) {
             const selectedCountry = event.target.value;
             const datasets = [];
+
             if (selectedCountry === 'all') {
+                // Tüm ülkeler seçildiğinde, tüm veri setlerini ekle
                 Object.keys(data.datasets).forEach(key => {
-                    datasets.push(data.datasets[key]);
+                    datasets.push({
+                        ...data.datasets[key],
+                        fill: false
+                    });
                 });
             } else if (data.datasets[selectedCountry]) {
-                datasets.push(data.datasets[selectedCountry]);
+                // Tek ülke seçildiğinde, o ülkenin verisini ekle
+                datasets.push({
+                    ...data.datasets[selectedCountry],
+                    fill: true
+                });
             }
+
             chart.data.datasets = datasets;
             chart.update();
         });
 
-       
+
         document.getElementById('countrySelect').dispatchEvent(new Event('change'));
+        loadInitialCountries();
     </script>
-   
+
 </body>
 
 </html>
